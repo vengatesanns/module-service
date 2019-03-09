@@ -1,0 +1,8 @@
+
+spring:
+  application:
+    name: module-service
+    
+    
+server:
+  port: 7400    
