@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="modules_info")
@@ -20,6 +21,9 @@ public class ModuleInfo {
 	private String moduleDescription;
 	
 	private String reportingPerson;
+	
+	@Transient
+	private String portNo;
 
 	public long getModuleId() {
 		return moduleId;
@@ -51,6 +55,14 @@ public class ModuleInfo {
 
 	public void setReportingPerson(String reportingPerson) {
 		this.reportingPerson = reportingPerson;
+	}
+
+	public String getPortNo() {
+		return portNo;
+	}
+
+	public void setPortNo(String portNo) {
+		this.portNo = portNo;
 	}
 	
 	

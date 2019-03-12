@@ -3,6 +3,7 @@ package com.hackpro.moduleservice.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +20,9 @@ public class ModuleController {
 	
 	@Autowired
 	private ModuleService moduleService;
+	
+	@Autowired
+	private Environment environment;
 	
 	
 	@PostMapping("/saveModules")
@@ -38,6 +42,8 @@ public class ModuleController {
 	@GetMapping("/findByModuleId/{id}")
 	public ModuleInfo findByModuleId(@PathVariable("id") long id)
 	{
-		return moduleService.findByModuleId(id);
+		ModuleInfo moduleInfo = moduleService.findByModuleId(id);
+		moduleInfo.setPortNo(environment.getProperty("local.server.port"));
+		return moduleInfo;
 	}
 }
