@@ -2,6 +2,8 @@ package com.hackpro.moduleservice.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +26,8 @@ public class ModuleController {
 	@Autowired
 	private Environment environment;
 	
+	private final static Logger logger = LoggerFactory.getLogger(ModuleController.class);
+	
 	
 	@PostMapping("/saveModules")
 	public void saveModulesInfo(@RequestBody ModuleInfo modules)
@@ -44,6 +48,7 @@ public class ModuleController {
 	{
 		ModuleInfo moduleInfo = moduleService.findByModuleId(id);
 		moduleInfo.setPortNo(environment.getProperty("local.server.port"));
+		logger.info("{}",moduleInfo);
 		return moduleInfo;
 	}
 }
